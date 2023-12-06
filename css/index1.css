@@ -1,0 +1,564 @@
+/* style.css */
+body {
+  /* font-family: monospace;
+   */
+  font-family: Arial, Helvetica, sans-serif;
+  /* background-color: #f0f0f0; */
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+.header-container {
+  text-align: center;
+  background-color: #f0f0f0;
+  padding: 1px;
+  border-radius: 10px; /* Optional: Add rounded corners */
+  font-family: "Arial", sans-serif; /* Specify the desired font family */
+}
+h2 {
+  text-align: center;
+  background: linear-gradient(to right, #4caf50, #2196f3);
+  -webkit-background-clip: text;
+  color: transparent;
+  text-transform: uppercase;
+}
+h3 {
+  text-align: center;
+  background: linear-gradient(to right, #4caf50, #2196f3);
+  -webkit-background-clip: text;
+  color: transparent;
+  font-weight: 900;
+  font-size: 18px;
+  /* text-transform: uppercase; */
+}
+
+.content-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+/* Custom styles for the form */
+.form-container {
+  background-color: #f8f9fa; /* Add your desired background color */
+  padding: 20px;
+  border-radius: 10px; /* Optional: Add rounded corners */
+  margin-top: 20px; /* Add spacing at the top */
+  height: 180px;
+}
+.form-control {
+  resize: none;
+  /* Disable manual resizing */
+  width: 300px;
+  height: 280px;
+  /* Set the default height */
+}
+.container-1 {
+  width: 350px;
+  text-align: center;
+  margin: 20px;
+  /* background-color: #fff; */
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  box-sizing: border-box;
+  background-color: #f0f0f0;
+}
+.btn-container {
+  position: relative;
+  overflow: hidden;
+  border: 2px solid #ccc;
+  color: #333;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  cursor: pointer;
+  font-size: 11px;
+}
+
+#namefile {
+  margin-top: 20px;
+}
+
+#drop-area.highlight {
+  border-color: #2196f3;
+  background-color: #e3f2fd;
+}
+
+#audio-player {
+  display: none; /* Initially hide the audio player */
+  margin-top: 20px; /* Add margin-top inside the #audio-player rule */
+}
+
+/* Hide the file input */
+#fileup {
+  display: none;
+}
+
+.compare-button {
+  text-align: center;
+  background: linear-gradient(to right, #4caf50, #2196f3);
+  color: white;
+  padding: 10px 40px;
+  border: none; /* Remove border for a cleaner look */
+  border-radius: 10px;
+  font-family: "Arial", sans-serif;
+  font-weight: bold;
+  display: inline-block;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.compare-button:hover {
+  background: linear-gradient(to right, #2196f3, #4caf50);
+}
+
+/* Optional: Add a subtle text shadow for better visibility */
+.compare-button:active {
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+.upload-button {
+  text-align: center;
+  background: linear-gradient(to right, #4caf50, #2196f3);
+  color: white;
+  padding: 10px 40px;
+  border: none; /* Remove border for a cleaner look */
+  border-radius: 10px;
+  font-family: "Arial", sans-serif;
+  font-weight: bold;
+  display: inline-block;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 5px;
+}
+
+.upload-button:hover {
+  background: linear-gradient(to right, #2196f3, #4caf50);
+}
+
+/* Optional: Add a subtle text shadow for better visibility */
+.upload-button:active {
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+.custom-file-upload {
+  text-align: center;
+  background: linear-gradient(to right, #4caf50, #2196f3);
+  color: white;
+  padding: 10px 40px;
+  border: none; /* Remove border for a cleaner look */
+  border-radius: 10px;
+  font-family: "Arial", sans-serif;
+  font-weight: bold;
+  display: inline-block;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 5px;
+}
+
+.custom-file-upload:hover {
+  background: linear-gradient(to right, #2196f3, #4caf50);
+}
+
+/* Optional: Add a subtle text shadow for better visibility */
+.custom-file-upload:active {
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Hide the actual file input */
+.custom-file-upload input[type="file"] {
+  display: none;
+}
+
+.section-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 90%;
+  margin: 25px 0 0 0;
+}
+.hr-line {
+  border: 16px solid darken(red, 35%);
+  border-radius: 30px;
+  box-shadow: 0 0 3px 1px darken(red, 5%);
+  margin: 0 auto;
+  position: relative;
+  width: 98%;
+}
+.button-compare {
+  width: 95%;
+  justify-content: end;
+  display: flex;
+}
+.wrapper {
+  width: 100%;
+}
+.heading-wrappper {
+  width: 96%;
+  margin: auto;
+}
+.heading-result {
+  margin: 50px 50px 0 0px;
+  text-align: left;
+
+  background: linear-gradient(to right, #4caf50, #2196f3);
+  -webkit-background-clip: text;
+  color: transparent;
+  font-weight: 900;
+  font-size: 22px;
+}
+
+.box-google-speech {
+  width: 30%;
+}
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: white;
+  /* Set background color to white */
+  color: black;
+  /* Set text color to black */
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  border: 1px solid black;
+  /* Add border for visibility */
+
+  /* Position the tooltip above the text */
+  position: absolute;
+  z-index: 1;
+  top: -30px;
+  padding: 20px;
+  text-align: justify;
+  /* Adjust the top value as needed */
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+.box p {
+  padding: 20px;
+  text-align: justify;
+}
+img {
+  width: 80px;
+  margin-top: 25px;
+}
+
+.correct {
+  background-color: #a1d4a0;
+  padding: 2px;
+}
+
+.deletion {
+  background-color: #f48080;
+  padding: 2px;
+}
+
+.insertion {
+  background-color: #c56cb9;
+  padding: 2px;
+}
+
+.repetition {
+  background-color: #c061b3;
+  padding: 2px;
+}
+
+.substitution {
+  background-color: #dfd597;
+  padding: 2px;
+}
+
+.line-skip,
+.jump {
+  background-color: #b1a6a2;
+  padding: 2px;
+  color: white;
+}
+
+.duplicate-line {
+  background-color: #40b2b2;
+  padding: 2px;
+}
+.wrapper-btn {
+  display: flex;
+  justify-content: flex-end;
+  width: 320px;
+}
+.Error-class {
+  margin-top: 35px;
+  display: flex;
+  flex-direction: column;
+}
+.Skipped {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+.Accuracy {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+.transcription {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+.wrapper-btn {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+.right {
+  margin-left: 20px;
+}
+
+.report123 {
+  padding: 0px;
+  display: flex;
+  justify-content: center;
+  font-size: 13px;
+}
+.container-1 {
+  width: 330px;
+  margin: auto;
+}
+
+@media only screen and (max-width: 1050px) {
+  .content-container {
+    flex-direction: column;
+  }
+  .box {
+    margin: auto;
+  }
+
+  .box-google-speech {
+    width: 50%;
+    margin: auto;
+  }
+  .container-1 {
+    margin: auto;
+  }
+  .report123 {
+    display: flex;
+    padding: 20px;
+    justify-content: center;
+  }
+}
+
+@media only screen and (max-width: 786px) {
+  .content-container {
+    flex-direction: column;
+  }
+  .box {
+    margin: auto;
+  }
+  .content-container {
+    flex-direction: column;
+    width: 95%;
+  }
+  .box-google-speech {
+    width: 50%;
+    margin: auto;
+  }
+}
+
+@media only screen and (max-width: 540px) {
+  .box-google-speech {
+    width: 95%;
+  }
+  h2 {
+    font-size: 14px;
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  .box-google-speech {
+    width: 95%;
+  }
+  hr {
+    display: none;
+  }
+  .form-control {
+    resize: none;
+    width: 250px;
+  }
+  .container-1 {
+    width: 276px;
+  }
+  h3 {
+    font-size: 16px;
+  }
+  .button-compare {
+    width: 95%;
+    justify-content: left;
+    display: flex;
+  }
+  /*  */
+  .Error-class {
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+  }
+  .left {
+    font-size: 11px;
+  }
+  .right {
+    font-size: 11px;
+    margin-left: 20px;
+  }
+  .Skipped {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+  }
+  .Accuracy {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+  }
+  .transcription {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+  }
+  .transcription-orginal-text {
+    margin-top: 5px;
+  }
+  .container-1 {
+    margin: 0px;
+  }
+  .Paragraph-wrapper {
+    width: 320px;
+  }
+  .wrapper-btn {
+    justify-content: center;
+    /* width: 320px; */
+  }
+  h3 {
+    font-size: 13px;
+    text-align: center;
+  }
+  h2 {
+    font-size: 14px;
+    font-size: 15px;
+    justify-content: center;
+  }
+  .button-compare {
+    justify-content: center;
+    margin: 20px;
+  }
+  .heading-result {
+    margin: 15px 0px;
+    text-align: left;
+    background: linear-gradient(to right, #4caf50, #2196f3);
+    -webkit-background-clip: text;
+    color: transparent;
+    font-weight: 900;
+    font-size: 15px;
+    text-align: center;
+  }
+  .section-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+
+    width: 100%;
+    margin: 25px 0 0 0;
+    justify-content: center;
+  }
+  .report123 {
+    padding: 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  .header-container {
+    width: 100%;
+  }
+  .container-1 {
+    margin: auto;
+  }
+}
+@media only screen and (max-width: 280px) {
+  h2 {
+    font-size: 11px;
+    text-align: center;
+    width: 100%;
+  }
+
+  audio {
+    width: 270px;
+  }
+}
+
+.highlightedWord {
+  padding: 2px 2px;
+  /* margin: 0px; */
+  border-radius: 1px;
+  display: inline-block;
+}
+
+.background-correct {
+  background-color: #329131;
+  color: #fff; /* White text on green background for better visibility */
+}
+
+.background-deletion {
+  background-color: #ab1717;
+  color: #fff; /* White text on red background for better visibility */
+}
+
+.background-insertion {
+  background-color: #aa2a99;
+  color: #fff; /* White text on purple background for better visibility */
+}
+
+.background-substitution {
+  background-color: #dfc951;
+  color: #333; /* Dark text on yellow background for better visibility */
+}
+
+.background-skip {
+  background-color: #b1a6a2;
+  color: #333; /* Dark text on grey background for better visibility */
+}
+
+.background-duplicate {
+  background-color: #40b2b2;
+  color: #fff; /* White text on cyan background for better visibility */
+}
+
+.background-correct {
+  background-color: #329131;
+  color: #fff; /* White text on green background for better visibility */
+}
+.background-deletion {
+  background-color: #ab1717;
+  color: #fff; /* White text on red background for better visibility */
+}
+.background-insertion {
+  background-color: #aa2a99;
+  color: #fff; /* White text on purple background for better visibility */
+}
+.background-substitution {
+  background-color: #dfc951;
+  color: #333; /* Dark text on yellow background for better visibility */
+}
+.background-skip {
+  background-color: #b1a6a2;
+  color: #333; /* Dark text on grey background for better visibility */
+}
+.background-duplicate {
+  background-color: #40b2b2;
+  color: #fff; /* White text on cyan background for better visibility */
+}

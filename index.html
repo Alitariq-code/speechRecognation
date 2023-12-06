@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Audio Uploader</title>
+  <!-- Bootstrap CSS link -->
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+WyqBQDF2akA+8M97b5qj5N2F/6tR6bY" crossorigin="anonymous" />
+
+  <link rel="stylesheet" href="css/index1.css" />
+  <link rel="stylesheet" href="css/spinner.css" />
+  <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase.js"></script>
+  <script src="./js/index.js"></script>
+</head>
+
+<body>
+  <div class="header-container">
+    <h2>Speech to Text Demo & Error Detection</h2>
+  </div>
+  <div class="wrapper">
+    <div class="content-container">
+      <div class="box">
+        <h3>Upload Audio</h3>
+        <div class="container-1 text-center form-container" style="height: 313px">
+          <div class="row">
+            <div class="col-md-6 offset-md-3 center">
+              <div class="btn-container" id="drop-area" style="height: 244px">
+                <img src="image/icons8-upload-94.png" alt="" style="width: 50px; margin-top: 37px" />
+                <p id="drag-text" style="padding: 0px">
+                  <!-- Drag and Drop Your Audio File (.wav, .webm, .mp3 files) -->
+                </p>
+                <label for="fileInp" class="custom-file-upload">
+                  <span>Choose File</span>
+                  <input type="file" class="inputFile" id="fileInp" onchange="getFile(event)"
+                    accept="audio/wav, audio/webm, audio/mp3" />
+                </label>
+                <label for="fileInp"></label>
+                <span class="fileText"></span>
+                <button class="upload-button" onclick="uploadAudio()">
+                  UPLOAD AUDIO
+                </button>
+                <div class="spinner-container" id="spinner1" style="margin: 10px 117px">
+                  <div class="spinner"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="box">
+        <h3>Original text as shown on screen:</h3>
+        <div class="container-1 mt-5">
+          <form>
+            <textarea class="form-control" id="OriginalText" rows="3" placeholder="Original text..."></textarea>
+          </form>
+        </div>
+      </div>
+
+      <div class="box">
+        <h3>Manual transcription (if available):</h3>
+        <div class="container-1 mt-5">
+          <form>
+            <textarea class="form-control" id="exampleTextarea2" rows="3"
+              placeholder="Enter your text here..."></textarea>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="button-compare">
+      <button class="compare-button" id="compare-button" style="margin: 10px" onclick="handleApi()">
+        Compare
+      </button>
+      <div class="spinner-container" id="spinner2" style="margin: 20px">
+        <div class="spinner"></div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="hr-line" />
+  <div class="heading-wrappper">
+    <h2 class="heading-result">Result</h2>
+    <div class="section-wrapper">
+      <div class="row" id="">
+        <div class="col-md-12">
+          <audio controls id="uploaded-audio"></audio>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-container">
+    <div class="box-google-speech">
+      <div class="box">
+        <h3>Google Speech to Text transcription</h3>
+        <div class="container-1 mt-5">
+          <form>
+            <textarea class="form-control" id="google" rows="3"
+              placeholder="Google Speech to Text transcription..."></textarea>
+          </form>
+        </div>
+
+        <div>
+          <div class="spinner-container" id="spinner3" style="width: 100%; margin-top: 30px;">
+            <div class="spinner" style="margin: auto;"></div>
+          </div>
+          <p id="tooltipParagraph1" class="comp" class="Paragraph-wrapper" style="font-size: 13px"></p>
+        </div>
+      </div>
+      <div class="report123">
+        <div class="left" style="display: flex; flex-direction: column; flex-wrap: nowrap">
+          <span>Words Reads (WR):</span>
+          <span>Words Correct (WC):</span>
+          <span>Words Correct Per Minutes (WCPM):</span>
+
+          <span style="margin-top: 15px">Error classification:</span>
+          <div style="margin-left: 50px; display: flex; flex-direction: column">
+            <span>Deletions</span>
+            <span>Insertions</span>
+            <span>Repetitions</span>
+            <span>Substitutions</span>
+            <span>Pauses</span>
+            <span>Hesitations</span>
+            <span>Self corrections</span>
+            <div class="Skipped">
+              <span>Skipped lines</span>
+              <span>Jumped line</span>
+              <span>Duplicate lines</span>
+            </div>
+          </div>
+
+          <div class="Accuracy">
+            <span>Accuracy</span>
+            <span>Audio duration:</span>
+            <span>Transcription confidence score:</span>
+          </div>
+          <div class="transcription">
+            <span>Transcription vs original text:</span>
+            <span>Manual Transcription vs Transcription</span>
+            <span>Manual Transcription vs original text</span>
+          </div>
+        </div>
+
+        <div class="right" style="display: flex; flex-direction: column">
+          <span id="Words-Reads">0</span>
+          <span id="Words-Correct">0</span>
+          <span id="Words-Correct-Perr">0</span>
+          <div class="Error-class">
+            <span></span>
+            <span id="Deletions">0</span>
+            <span id="Insertions">0</span>
+            <span id="Repetitions">0</span>
+            <span id="Substitutions">0</span>
+            <span id="Pauses">0</span>
+            <span id="Hesitations">0</span>
+            <span id="Self">0</span>
+          </div>
+
+          <div class="Skipped">
+            <span id="Skipped">0</span>
+            <span id="Jumped">0</span>
+            <span id="Duplicate">0</span>
+          </div>
+          <div class="Accuracy">
+            <span id="Accuracy">0</span>
+            <span id="audio-duration" style="flex-direction: row">0</span>
+            <span id="transcription">0%</span>
+          </div>
+          <div class="transcription">
+            <span id="transcription-orginal-text" class="transcription-orginal-text">0%</span>
+            <span id="Manual-transcription">0%</span>
+            <span id="Manual-original">0%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr />
+    <div class="box-google-speech">
+      <div class="box">
+        <h3>VOSK with Kaldi_NL transcription</h3>
+        <div class="container-1 mt-5">
+          <form>
+            <textarea class="form-control" id="vkos" rows="3"
+              placeholder="VOSK with Kaldi_NL transcription..."></textarea>
+          </form>
+        </div>
+        <div>
+        <div class="spinner-container" id="spinner4" style="width: 100%; margin-top: 30px;">
+          <div class="spinner" style="margin: auto;"></div>
+        </div>
+          <p id="tooltipParagraph2" class="Paragraph-wrapper" style="font-size: 13px"></p>
+        </div>
+      </div>
+      <div class="report123">
+        <div class="left" style="display: flex; flex-direction: column; flex-wrap: nowrap">
+          <span>Words Reads (WR):</span>
+          <span>Words Correct (WC):</span>
+          <span>Words Correct Per Minutes (WCPM):</span>
+
+          <span style="margin-top: 15px">Error classification:</span>
+          <div style="margin-left: 50px; display: flex; flex-direction: column">
+            <span>Deletions</span>
+            <span>Insertions</span>
+            <span>Repetitions</span>
+            <span>Substitutions</span>
+            <span>Pauses</span>
+            <span>Hesitations</span>
+            <span>Self corrections</span>
+            <div class="Skipped">
+              <span>Skipped lines</span>
+              <span>Jumped line</span>
+              <span>Duplicate lines</span>
+            </div>
+          </div>
+
+          <div class="Accuracy">
+            <span>Accuracy</span>
+            <span>Audio duration:</span>
+            <span>Transcription confidence score:</span>
+          </div>
+          <div class="transcription">
+            <span>Transcription vs original text:</span>
+            <span>Manual Transcription vs Transcription</span>
+            <span>Manual Transcription vs original text</span>
+          </div>
+        </div>
+
+        <div class="right" style="display: flex; flex-direction: column">
+          <span id="Words-Reads-1">0</span>
+          <span id="Words-Correct-1">0</span>
+          <span id="Words-Correct-Perr-1">0</span>
+          <div class="Error-class">
+            <span></span>
+            <span id="Deletions-1">0</span>
+            <span id="Insertions-1">0</span>
+            <span id="Repetitions-1">0</span>
+            <span id="Substitutions-1">0</span>
+            <span id="Pauses-1">0</span>
+            <span id="Hesitations-1">0</span>
+            <span id="Self-1">0</span>
+          </div>
+
+          <div class="Skipped">
+            <span id="Skipped-1">0</span>
+            <span id="Jumped-1">0</span>
+            <span id="Duplicate-1">0</span>
+          </div>
+          <div class="Accuracy">
+            <span id="Accuracy-1">0</span>
+            <span id="audio-duration-1" style="flex-direction: row">0</span>
+            <span id="transcription-1">0%</span>
+          </div>
+          <div class="transcription">
+            <span id="transcription-orginal-text-1" class="transcription-orginal-text">0</span>
+            <span id="Manual-transcription-1">0</span>
+            <span id="Manual-original-1">0</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr />
+    <div class="box-google-speech">
+      <div class="box">
+        <h3>OpenAI Whisper transcription</h3>
+        <div class="container-1 mt-5">
+          <form>
+            <textarea class="form-control" id="OpenAI" rows="3"
+              placeholder="OpenAI Whisper transcription..."></textarea>
+          </form>
+        </div>
+        <div>
+          <div class="spinner-container" id="spinner5" style="width: 100%; margin-top: 30px;">
+            <div class="spinner" style="margin: auto;"></div>
+          </div>
+          <p id="tooltipParagraph3" class="Paragraph-wrapper" style="font-size: 13px"></p>
+        </div>
+        <div class="report123">
+          <div class="left" style="display: flex; flex-direction: column; flex-wrap: nowrap">
+            <span>Words Reads (WR):</span>
+            <span>Words Correct (WC):</span>
+            <span>Words Correct Per Minutes (WCPM):</span>
+
+            <span style="margin-top: 15px">Error classification:</span>
+            <div style="margin-left: 50px; display: flex; flex-direction: column">
+              <span>Deletions</span>
+              <span>Insertions</span>
+              <span>Repetitions</span>
+              <span>Substitutions</span>
+              <span>Pauses</span>
+              <span>Hesitations</span>
+              <span>Self corrections</span>
+              <div class="Skipped">
+                <span>Skipped lines</span>
+                <span>Jumped line</span>
+                <span>Duplicate lines</span>
+              </div>
+            </div>
+
+            <div class="Accuracy">
+              <span>Accuracy</span>
+              <span>Audio duration:</span>
+              <span>Transcription confidence score..</span>
+            </div>
+            <div class="transcription">
+              <span>Transcription vs original text:</span>
+              <span>Manual Transcription vs Transcription</span>
+              <span>Manual Transcription vs original text</span>
+            </div>
+          </div>
+
+          <div class="right" style="display: flex; flex-direction: column">
+            <span id="Words-Reads-2">0</span>
+            <span id="Words-Correct-2">0</span>
+            <span id="Words-Correct-Perr-2">0</span>
+            <div class="Error-class">
+              <span></span>
+              <span id="Deletions-2">0</span>
+              <span id="Insertions-2">0</span>
+              <span id="Repetitions-2">0</span>
+              <span id="Substitutions-2">0</span>
+              <span id="Pauses-2">0</span>
+              <span id="Hesitations-2">0</span>
+              <span id="Self-2">0</span>
+            </div>
+
+            <div class="Skipped">
+              <span id="Skipped-2">0</span>
+              <span id="Jumped-2">0</span>
+              <span id="Duplicate-2">0</span>
+            </div>
+            <div class="Accuracy">
+              <span id="Accuracy-2">0</span>
+              <span id="audio-duration-2" style="flex-direction: row">0</span>
+              <span id="transcription-2">0</span>
+            </div>
+            <div class="transcription">
+              <span id="transcription-orginal-text-2" class="transcription-orginal-text">0%</span>
+              <span id="Manual-transcription-2">0</span>
+              <span id="Manual-original-2">0</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="wrapper-btn">
+    <button class="compare-button" style="margin: 20px" id="resetButton">
+      Reset
+    </button>
+  </div>
+  <script>
+    document
+      .getElementById('resetButton')
+      .addEventListener('click', function () {
+        // Reload the page
+        location.reload();
+
+        // Scroll to the top of the page
+        window.scrollTo(0, 0);
+      });
+  </script>
+</body>
+
+</html>
